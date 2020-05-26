@@ -1,8 +1,8 @@
-pipeline {
+rpipeline {
     agent any
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "willbla/train-schedule"
+        DOCKER_IMAGE_NAME = "mantleray/train-schedule"
     }
     stages {
         stage('Build') {
@@ -31,7 +31,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_token') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
